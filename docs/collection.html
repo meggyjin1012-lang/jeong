@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>컬렉션 — 수원 의정 아카이브</title>
+<meta name="description" content="수원 의정 아카이브 소장 자료 12건을 검색하고 시대·유형별로 살펴보세요.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="수원 의정 아카이브 홈">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="19" cy="22" r="16" fill="#FFE600"/><circle cx="32" cy="17" r="12" fill="#FF4FA0" fill-opacity=".92"/><circle cx="33" cy="35" r="9" fill="#2EB4F0"/><path d="M12 30a11 11 0 0 0 9 4.5" fill="none" stroke="#141414" stroke-width="3.2" stroke-linecap="round"/><rect x="11" y="19" width="20" height="4.4" rx="2.2" fill="#141414"/></svg>
+      <span><b>수원 의정 아카이브</b><small>Suwon Council Archive</small></span>
+    </a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="index.html">홈</a>
+      <a href="collection.html" aria-current="page">컬렉션</a>
+      <a href="exhibition.html">디지털 전시</a>
+      <a href="about.html">소개</a>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+  <section class="phead">
+    <span class="giant" aria-hidden="true" style="--c:var(--pink)">voice</span>
+    <span class="ring" aria-hidden="true" style="width:180px;height:180px;background:var(--yellow);right:8%;bottom:-60px"></span>
+    <span class="ring" aria-hidden="true" style="width:70px;height:70px;background:var(--sky);right:22%;top:40px"></span>
+    <div class="wrap">
+      <span class="tag" style="--c:var(--yellow)"><i></i>Collection · 소장 자료</span>
+      <h1>컬렉<span class="cg fill" style="--c:var(--sky)">션</span></h1>
+      <p class="lead">신문기사부터 선거공보까지, 수원 지방의회 100년을 보여 주는 자료 12건. 검색하거나 시대·유형으로 골라 보세요.</p>
+      <form class="bigsearch" action="collection.html" method="get" role="search">
+        <label class="sr" for="q">컬렉션 검색</label>
+        <input id="q" type="search" name="q" placeholder="제목, 인물, 태그로 검색" autocomplete="off">
+        <button type="submit"><svg class="ico" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>검색</span></button>
+      </form>
+      <div class="filters">
+        <div class="frow" role="group" aria-label="시대 필터"><span>시대</span>
+          <button class="chip all" data-filter="era" data-value="">전체</button>
+          <button class="chip" style="--c:var(--red)" data-filter="era" data-value="식민지 시기"><i></i>식민지 시기</button>
+          <button class="chip" style="--c:var(--sky)" data-filter="era" data-value="1950년대"><i></i>1950년대</button>
+          <button class="chip" style="--c:var(--green)" data-filter="era" data-value="지방자치 부활 이후"><i></i>지방자치 부활 이후</button>
+        </div>
+        <div class="frow" role="group" aria-label="유형 필터"><span>유형</span>
+          <button class="chip all" data-filter="type" data-value="">전체</button>
+          <button class="chip t-신문기사" data-filter="type" data-value="신문기사"><i></i>신문기사</button>
+          <button class="chip dk t-사진" data-filter="type" data-value="사진"><i></i>사진</button>
+          <button class="chip t-포스터" data-filter="type" data-value="포스터"><i></i>포스터</button>
+          <button class="chip t-선거자료" data-filter="type" data-value="선거자료"><i></i>선거자료</button>
+          <button class="chip t-문헌" data-filter="type" data-value="문헌"><i></i>문헌</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="wrap" aria-label="검색 결과">
+    <p class="resbar" aria-live="polite"><span class="n" id="count">12</span>건의 자료</p>
+    <div class="cards" id="list"></div>
+  </section>
+  <dialog id="item-dialog" aria-label="자료 상세"></dialog>
+</main>
+
+
+<footer class="site-foot">
+  <span class="giant" aria-hidden="true">voice</span>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="index.html"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="19" cy="22" r="16" fill="#FFE600"/><circle cx="32" cy="17" r="12" fill="#FF4FA0" fill-opacity=".92"/><circle cx="33" cy="35" r="9" fill="#2EB4F0"/><path d="M12 30a11 11 0 0 0 9 4.5" fill="none" stroke="#141414" stroke-width="3.2" stroke-linecap="round"/><rect x="11" y="19" width="20" height="4.4" rx="2.2" fill="#141414"/></svg><span><b>수원 의정 아카이브</b><small>Suwon Council Archive</small></span></a>
+        <p>수원시의원으로 살다 — 자치 100년의 기록. 원천 자료: 『수원시의원으로 살다』 Ⅱ장 「수원시의원들의 사회적 배경」.</p>
+      </div>
+      <div><h4>MENU</h4><ul><li><a href="index.html">홈</a></li><li><a href="collection.html">컬렉션</a></li><li><a href="exhibition.html">디지털 전시</a></li><li><a href="about.html">소개</a></li></ul></div>
+      <div><h4>CONTACT</h4><ul><li><a href="mailto:archive@suwon-council.example">archive@suwon-council.example</a></li><li>자료 제공 · 수원박물관 · 수원시의회</li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 수원 의정 아카이브</span><span class="foot-dots"><i style="--c:var(--yellow)"></i><i style="--c:var(--pink)"></i><i style="--c:var(--sky)"></i><i style="--c:var(--green)"></i><i style="--c:var(--purple)"></i></span></div>
+  </div>
+</footer>
+
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+<script>
+  var esc = Archive.escapeHtml;
+  function yr(it) { return /년대/.test(it.date) ? it.date.slice(0, 4) + "s" : it.year; }
+  Archive.mount({
+    list: document.getElementById("list"),
+    count: document.getElementById("count"),
+    input: document.getElementById("q"),
+    card: function (it) {
+      return '<button type="button" class="card t-' + it.type + '" data-id="' + it.id + '">' +
+        '<div class="pic"><div class="duo"><img src="' + it.src + '" alt="' + esc(it.title) + '" loading="lazy"></div>' +
+        '<span class="badge">' + it.type + '</span><span class="yr">' + yr(it) + '</span></div>' +
+        '<h3>' + esc(it.title) + '</h3><p class="meta">' + it.id + ' · ' + esc(it.era) + '</p></button>';
+    },
+    detail: function (it) {
+      return '<div class="dlg t-' + it.type + '">' +
+        '<button class="dlg-close" data-close aria-label="닫기">×</button>' +
+        '<div class="dlg-pic"><img src="' + it.src + '" alt="' + esc(it.title) + '"></div>' +
+        '<div class="dlg-body"><span class="badge">' + it.type + '</span>' +
+        '<h2>' + esc(it.title) + '</h2>' +
+        '<table class="meta-t"><tbody>' +
+        '<tr><th>식별번호</th><td>' + it.id + '</td></tr>' +
+        '<tr><th>일자</th><td>' + esc(it.date) + '</td></tr>' +
+        '<tr><th>시대</th><td>' + esc(it.era) + '</td></tr>' +
+        '<tr><th>유형</th><td>' + esc(it.type) + '</td></tr>' +
+        '<tr><th>출처·소장</th><td>' + esc(it.source) + '</td></tr>' +
+        '<tr><th>수록 쪽</th><td>' + it.page + '쪽</td></tr>' +
+        '<tr><th>태그</th><td><div class="tags">' + it.tags.map(function (t) { return '<span>#' + esc(t) + '</span>'; }).join("") + '</div></td></tr>' +
+        '</tbody></table><p class="desc">' + esc(it.desc) + '</p>' +
+        (it.file ? '<a class="pdf" href="' + encodeURI(it.file) + '" target="_blank" rel="noopener">원문 PDF 보기</a>' : '') +
+        '</div></div>';
+    }
+  });
+</script>
+</body>
+</html>
