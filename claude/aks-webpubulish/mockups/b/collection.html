@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>컬렉션 — 수원 의정 아카이브</title>
+<meta name="description" content="수원시의원으로 살다 — 자치 100년의 기록. 수원 지방의회 100년의 사진·신문·선거자료를 모은 디지털 아카이브.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="수원 의정 아카이브 홈">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M11 14V6.5h8.5L22 9v5"/><path d="M14 10h5"/><rect x="5" y="14" width="22" height="13" rx="2"/><path d="M10 14h12"/></g><circle cx="16" cy="21" r="2" fill="#F0462E"/></svg>
+      수원 의정 아카이브 <small>Suwon Council Archive</small>
+    </a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="index.html">홈</a>
+      <a href="collection.html" aria-current="page">컬렉션</a>
+      <a href="exhibition.html">디지털 전시</a>
+      <a href="about.html">소개</a>
+    </nav>
+    <form class="hsearch" action="collection.html" method="get" role="search">
+      <input type="search" name="q" placeholder="자료 검색" aria-label="자료 검색">
+      <button type="submit" aria-label="검색">→</button>
+    </form>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="page-head">
+    <p class="eyebrow">Collection · 소장 자료</p>
+    <h1>컬렉션<i>Catalogue</i></h1>
+    <p>식민지 시기 면협의회부터 1991년 지방자치 부활 이후까지, 『수원시의원으로 살다』 Ⅱ장에 수록된 신문기사·사진·포스터·선거자료·문헌을 한곳에 모았습니다. 카드를 누르면 상세 정보를 볼 수 있습니다.</p>
+  </section>
+
+  <div class="toolbar">
+    <form class="bigsearch" action="collection.html" method="get" role="search">
+      <input id="q" type="search" name="q" placeholder="검색어 — 예: 여성, 1952, 공보" aria-label="소장 자료 검색">
+      <button class="btn" type="submit">검색</button>
+    </form>
+    <p class="count" aria-live="polite"><b id="count">12</b>건의 자료</p>
+  </div>
+
+  <div class="filters" role="group" aria-label="자료 유형">
+    <span class="label">유형</span>
+    <button class="chip" data-filter="type" data-value="">전체</button>
+    <button class="chip" data-filter="type" data-value="신문기사">신문기사</button>
+    <button class="chip" data-filter="type" data-value="사진">사진</button>
+    <button class="chip" data-filter="type" data-value="포스터">포스터</button>
+    <button class="chip" data-filter="type" data-value="선거자료">선거자료</button>
+    <button class="chip" data-filter="type" data-value="문헌">문헌</button>
+  </div>
+
+  <div class="tabs" role="group" aria-label="시대">
+    <button class="tab" data-filter="era" data-value="">전체 시대</button>
+    <button class="tab" data-filter="era" data-value="식민지 시기">식민지 시기</button>
+    <button class="tab" data-filter="era" data-value="1950년대">1950년대</button>
+    <button class="tab" data-filter="era" data-value="지방자치 부활 이후">지방자치 부활 이후</button>
+  </div>
+  <div class="grid" id="list"></div>
+</main>
+
+<dialog id="item-dialog" aria-label="자료 상세"></dialog>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <a href="index.html">Home<span>홈</span></a>
+      <a href="collection.html">Collection<span>컬렉션</span></a>
+      <a href="exhibition.html">Exhibition<span>디지털 전시</span></a>
+      <a href="about.html">About<span>소개</span></a>
+      <div>Source<span>『수원시의원으로 살다』 Ⅱ장</span></div>
+      <div>Mail<a href="mailto:archive@suwon-council.example"><span>archive@suwon-council.example</span></a></div>
+    </div>
+    <div class="foot-bottom"><span>수원 의정 아카이브 · Suwon Council Archive</span><span>수원시의원으로 살다 — 자치 100년의 기록</span></div>
+  </div>
+</footer>
+<script src="../assets/data.js"></script>
+<script src="../assets/app.js"></script>
+<script>
+(function () {
+  var esc = Archive.escapeHtml;
+  var TALL = /news|poster-1956|leesuyeon/;
+  var BADGE = { "사진": "", "신문기사": "paper", "포스터": "red", "선거자료": "red", "문헌": "paper" };
+  function pills(tags) { return tags.map(function (t) { return '<span class="pill">' + esc(t) + "</span>"; }).join(""); }
+  Archive.mount({
+    list: document.getElementById("list"),
+    count: document.getElementById("count"),
+    input: document.getElementById("q"),
+    card: function (it) {
+      return '<article class="cell"><a class="card" href="#' + it.id + '" data-id="' + it.id + '">' +
+        '<div class="photo"><span class="badge ' + BADGE[it.type] + '">' + esc(it.type) + "</span>" +
+        '<img class="' + (TALL.test(it.image) ? "top" : "") + '" src="' + it.src + '" alt="' + esc(it.title) + '"></div>' +
+        '<div class="card-row"><h3 title="' + esc(it.title) + '">' + esc(it.title) + "</h3><time>" + esc(it.date) + "</time></div>" +
+        '<p class="era">' + esc(it.era) + " · " + esc(it.id) + "</p>" +
+        '<div class="pills">' + pills(it.tags) + "</div></a></article>";
+    },
+    detail: function (it) {
+      var row = function (k, v) { return "<tr><th>" + k + "</th><td>" + v + "</td></tr>"; };
+      return '<div class="dlg"><div class="dlg-img"><img src="' + it.src + '" alt="' + esc(it.title) + '"></div>' +
+        '<div class="dlg-body"><div class="dlg-top"><span class="badge ' + BADGE[it.type] + '">' + esc(it.type) + "</span>" +
+        '<button class="close" data-close autofocus>닫기 ✕</button></div>' +
+        "<h2>" + esc(it.title) + '</h2><table class="meta"><tbody>' +
+        row("식별번호", esc(it.id)) + row("일자", esc(it.date)) + row("시대", esc(it.era)) + row("유형", esc(it.type)) +
+        row("출처·소장", esc(it.source)) + row("수록 쪽", it.page + "쪽") + row("태그", '<div class="pills">' + pills(it.tags) + "</div>") +
+        '</tbody></table><p class="dlg-desc">' + esc(it.desc) + "</p>" +
+        (it.file ? '<a class="btn red" href="' + it.file + '" target="_blank" rel="noopener">원문 PDF 보기 ↗</a>' : "") +
+        "</div></div>";
+    }
+  });
+})();
+</script>
+</body>
+</html>

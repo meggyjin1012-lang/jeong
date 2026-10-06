@@ -101,7 +101,7 @@ button.tab { font-family: var(--serif); }
 .card .photo img.top { object-position: center top; }
 .badge { position: absolute; top: 14px; right: 14px; z-index: 1; font: 600 12px/1 var(--sans); padding: 7px 12px; border-radius: 999px; background: var(--blue); color: #fff; }
 .badge.red { background: var(--red); }
-.badge.paper { background: var(--paper); color: var(--ink); }
+.badge.paper { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .card-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 20px; }
 .card-row h3 { font: 600 17px/1.35 var(--sans); letter-spacing: -.02em; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .card-row time { font: 400 16px/1 var(--display); white-space: nowrap; }
@@ -191,7 +191,7 @@ dialog::backdrop { background: rgba(26,24,20,.55); backdrop-filter: blur(2px); }
 .ch-body { max-width: 860px; }
 .ch-body h2 { font: 700 clamp(30px, 3.6vw, 50px)/1.18 var(--serif); letter-spacing: -.03em; margin-bottom: 26px; }
 .ch-body > p { font-size: 17.5px; line-height: 1.95; text-align: justify; margin-bottom: 18px; }
-.ch-body > p:first-of-type::first-letter { font: 900 3.4em/0.9 var(--serif); float: left; margin: 6px 10px 0 0; }
+#prologue .ch-body > p:first-of-type::first-letter { font: 900 3.4em/0.9 var(--serif); float: left; margin: 6px 10px 0 0; }
 .quote { margin: 44px 0; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font: 400 clamp(26px, 3.2vw, 42px)/1.35 var(--serif); letter-spacing: -.02em; }
 .quote::before { content: "“"; display: block; font: 400 80px/.5 var(--display); color: var(--red); margin: 18px 0 4px; }
 .quote cite { display: block; margin-top: 14px; font: italic 16px/1.4 var(--display); color: var(--muted); }
@@ -255,7 +255,8 @@ dialog::backdrop { background: rgba(26,24,20,.55); backdrop-filter: blur(2px); }
   .foot > :last-child { grid-column: 1 / -1; }
   .dlg { grid-template-columns: 1fr; }
   .dlg-img { border-right: 0; border-bottom: 1px solid var(--line); }
-  .dlg-img img { max-height: 46vh; }
+  .dlg-img { padding: 16px; }
+  .dlg-img img { max-height: 34vh; }
 }
 @media (max-width: 680px) {
   body { font-size: 15.5px; }
@@ -264,8 +265,10 @@ dialog::backdrop { background: rgba(26,24,20,.55); backdrop-filter: blur(2px); }
   .nav { margin-left: 0; width: 100%; justify-content: space-between; gap: 8px; font-size: 13.5px; }
   .mast-meta span:last-child { display: none; }
   .grid { grid-template-columns: 1fr; }
-  .tabs { padding-left: 10px; gap: 6px; }
-  .tab { min-width: 0; padding: 8px 16px 7px 12px; font-size: 15px; }
+  .tabs { padding-left: 10px; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-bottom: -1px; position: relative; }
+  .tab { min-width: 0; flex: none; white-space: nowrap; margin-bottom: 0; padding: 8px 16px 7px 12px; font-size: 15px; }
+  .intro, .lead, .ch-body > p, .about-grid p { text-align: left; }
+  .page-head { padding: 36px 0 28px; }
   .section { margin-top: 64px; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .bigsearch { padding-left: 16px; }
