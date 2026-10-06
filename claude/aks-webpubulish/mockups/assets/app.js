@@ -33,7 +33,7 @@
       var res = items.filter(function (it) { return match(it, state.q, state); });
       o.list.innerHTML = res.length
         ? res.map(o.card).join("")
-        : '<p class="empty">“' + escapeHtml(state.q) + '”에 해당하는 자료가 없습니다.</p>';
+        : '<p class="empty">' + (state.q ? '“' + escapeHtml(state.q) + '”에 해당하는 ' : '조건에 맞는 ') + '자료가 없습니다.</p>';
       if (o.count) o.count.textContent = res.length;
       document.querySelectorAll("[data-filter]").forEach(function (b) {
         b.classList.toggle("is-active", (state[b.dataset.filter] || "") === b.dataset.value);
